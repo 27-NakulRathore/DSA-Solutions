@@ -1,32 +1,28 @@
 #include <string>
+#include <vector>
+#include <algorithm>
 
 class Solution {
-typedef pair<char, int> P;
 public:
     string frequencySort(string s) {
-        vector<P> vec(123);
+        vector<pair<char, int>> freq(128); // ASCII range
 
-        for(char &ch : s){
-            int freq = vec[ch].second;
-            vec[ch] = {ch, freq + 1};
+        for (char ch : s) {
+            freq[ch].first = ch;
+            freq[ch].second++;
         }
 
-        auto lambda = [&](P &p1, P &p2){
-            return p1.second > p2.second;
-        };
+        sort(freq.begin(), freq.end(), [](const auto &a, const auto &b) {
+            return a.second > b.second;
+        });
 
-        sort(vec.begin(), vec.end(), lambda);
-
-        string result = "";
-
-        for(int i = 0; i<=122; i++){
-            if(vec[i].second > 0){
-                char ch = vec[i].first;
-                int freq = vec[i].second;
-                string s = string(freq,ch);
-                result += s;
+        string result;
+        for (auto &[ch, count] : freq) {
+            if (count > 0) {
+                result += string(count, ch);
             }
         }
+
         return result;
     }
 };
