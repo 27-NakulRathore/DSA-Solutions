@@ -2,25 +2,43 @@
 #include <string>
 using namespace std;
 
-string compressString(string s) {
-    string compressed = "";
-    int count = 1;
-    
-    for (int i = 1; i <= s.length(); i++) {
-        if (i < s.length() && s[i] == s[i - 1]) {
-            count++;
-        } else {
-            compressed += s[i - 1] + to_string(count);
-            count = 1;
-        }
-    }
+class Solution {
+public:
+    int compress(vector<char>& chars) {
+        int n = chars.size();
 
-    return compressed.length() < s.length() ? compressed : s;
-}
+        int i=0;
+        int index=0;
+
+        while(i < n){
+            char cur_char = chars[i];
+            int count = 0;
+
+            //find count of duplicates
+            while(i < n && chars[i] == cur_char){
+                count++;
+                i++;
+            }
+
+            //do the ASSIGN work
+            chars[index] = cur_char;
+            index++;
+
+            if(count > 1){
+                string count_str = to_string(count);
+                for(char &ch : count_str){
+                    chars[index] = ch;
+                    index++;
+                }
+            }
+        }
+        return index;
+    }
+};
 
 int main() {
-    string str;
+    vecotr<char> str[];
     cin >> str;
-    cout << compressString(str) << endl;
+    cout << compress(str) << endl;
     return 0;
 }
