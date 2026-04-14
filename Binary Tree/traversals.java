@@ -61,20 +61,20 @@ class traversals {
         }
     }
 
-    public static int Height(Node root){
-        if(root == null){
+    public static int Height(Node root) {
+        if (root == null) {
             return 0;
         }
         int leftHeight = Height(root.left);
         int rightHeight = Height(root.right);
 
-        int height = Math.max(leftHeight,rightHeight) + 1;
+        int height = Math.max(leftHeight, rightHeight) + 1;
 
         return height;
     }
 
-    public static int Count(Node root){
-        if(root == null){
+    public static int Count(Node root) {
+        if (root == null) {
             return 0;
         }
         int leftCount = Count(root.left);
@@ -85,8 +85,8 @@ class traversals {
         return treeCount;
     }
 
-    public static int nodeSum(Node root){
-        if(root == null){
+    public static int nodeSum(Node root) {
+        if (root == null) {
             return 0;
         }
         int leftSum = nodeSum(root.left);
@@ -96,8 +96,9 @@ class traversals {
 
         return treeSum;
     }
+
     public static void main(String[] args) {
-        int nodes[] = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
+        int nodes[] = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
         BinaryTree tree = new BinaryTree();
 
         Node root = tree.buildTree(nodes);
@@ -106,11 +107,11 @@ class traversals {
         System.out.println("Level Order Traversal:");
         levelOrderTraversal(root);
 
-        System.out.println("Height of Tree: "+Height(root));
+        System.out.println("Height of Tree: " + Height(root));
 
-        System.out.println("Total node in tree: "+Count(root));
+        System.out.println("Total node in tree: " + Count(root));
 
-        System.out.print("Sum of nodes: "+nodeSum(root));
-        
+        System.out.print("Sum of nodes: " + nodeSum(root));
+
     }
 }
